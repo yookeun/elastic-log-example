@@ -2,6 +2,7 @@ package com.example.elklog.control;
 
 
 import com.example.elklog.model.Weather;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.logstash.logback.argument.StructuredArguments.entries;
-import static net.logstash.logback.argument.StructuredArguments.fields;
-import static net.logstash.logback.argument.StructuredArguments.value;
+
 
 /**
  * Created by yookeun on 2017. 11. 9..
@@ -33,11 +33,17 @@ public class LogController {
         weather.setTemperature(12.3);
         weather.setPopulation(12000000);
         logger.info("{}",weather);
+        /*
         Map<String, Object> map = new HashMap<>();
         map.put("city", weather.getCity());
         map.put("temperature", weather.getTemperature());
         map.put("population", weather.getPopulation());
         loggerStash.info("{}", entries(map));
+        */
+        Gson gson = new Gson();
+        loggerStash.info("{}", gson.toJson(weather));
+
+
         return "Hello, world";
     }
 }
